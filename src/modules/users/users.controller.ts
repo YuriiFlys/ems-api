@@ -10,7 +10,16 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   async getProfile(@Request() req) {
-    const user = await this.usersService.user({ id: req.user.userId || req.user.sub });
+    const user = await this.usersService.user({
+      where: { id: req.user.userId || req.user.sub },
+      include: {
+        attendances: {
+          include: {
+            event: true,
+          },
+        },
+      },
+    });
     if (!user) {
       throw new NotFoundException('User not found');
     }

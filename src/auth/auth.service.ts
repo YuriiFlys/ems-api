@@ -13,7 +13,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.usersService.user({ email });
+    const user = await this.usersService.user({ where: { email } });
     if (user && await bcrypt.compare(pass, user.password)) {
       const { password, ...result } = user;
       return result;
@@ -36,14 +36,14 @@ export class AuthService {
   }
 
   async register(data: SignUpDto) {
-    const existing = await this.usersService.user({ email: data.email });
+    const existing = await this.usersService.user({ where: { email: data.email } });
     if (existing) {
       throw new ConflictException('Email already in use');
     }
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const user = await this.usersService.createUser({
       ...data,
-      role: data.role || 'USER', // Prisma's default is USER, but safe to fallback
+      role: data.role || 'USER',
       password: hashedPassword,
     });
     

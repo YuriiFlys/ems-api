@@ -8,10 +8,11 @@ import { UsersRepository } from './users.repository';
 export class UsersService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async user(
-    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-  ): Promise<User | null> {
-    return this.usersRepository.findUnique(userWhereUniqueInput);
+  async user(params: {
+    where: Prisma.UserWhereUniqueInput;
+    include?: Prisma.UserInclude;
+  }): Promise<User | null> {
+    return this.usersRepository.findUnique(params);
   }
 
   async createUser(data: Prisma.UserCreateInput): Promise<User> {

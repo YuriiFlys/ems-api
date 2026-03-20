@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty, IsDateString, IsOptional, IsNumber, IsEnum } from 'class-validator';
-import { Category } from '../../../../generated/prisma/client';
+import { Category } from '../../../generated/prisma/client';
 
 export class UpdateEventDto {
   @IsOptional()

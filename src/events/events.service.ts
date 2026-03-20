@@ -3,7 +3,7 @@ import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventQueryDto } from './dto/event-query.dto';
 import { EventsRepository } from './events.repository';
-import { Prisma } from '../../../generated/prisma/client';
+import { Prisma } from '../../generated/prisma/client';
 
 @Injectable()
 export class EventsService {

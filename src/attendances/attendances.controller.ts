@@ -1,6 +1,6 @@
 import { Controller, Post, Delete, Param, UseGuards, Request } from '@nestjs/common';
 import { AttendancesService } from './attendances.service';
-import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('events')
 export class AttendancesController {

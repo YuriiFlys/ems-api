@@ -1,6 +1,6 @@
 import { IsOptional, IsEnum, IsString, IsDateString, IsIn, IsInt, Min } from 'class-validator';
 import { Type } from 'class-transformer';
-import { Category } from '../../../../generated/prisma/client';
+import { Category } from '../../../generated/prisma/client';
 
 export class EventQueryDto {
   @IsOptional()

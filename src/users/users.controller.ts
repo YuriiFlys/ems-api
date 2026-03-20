@@ -1,12 +1,17 @@
 import { Controller, Get, Patch, Body, UseGuards, Request, NotFoundException } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { UsersService } from './users.service'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 
+@ApiTags('users')
+@ApiBearerAuth()
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiOperation({ summary: 'Get current user profile' })
+  @ApiResponse({ status: 200, description: 'User profile details' })
   @UseGuards(JwtAuthGuard)
   @Get('me')
   async getProfile(@Request() req) {
@@ -28,6 +33,8 @@ export class UsersController {
     return result;
   }
 
+  @ApiOperation({ summary: 'Update current user profile' })
+  @ApiResponse({ status: 200, description: 'Updated user details' })
   @UseGuards(JwtAuthGuard)
   @Patch('me')
   async updateProfile(@Request() req, @Body() updateUserDto: UpdateUserDto) {
